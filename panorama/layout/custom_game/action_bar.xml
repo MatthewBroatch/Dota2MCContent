@@ -7,9 +7,19 @@
 		<include src="file://{resources}/scripts/custom_game/action_bar.js" />
 	</scripts>
 	<Panel class="AbilityOverlayRoot">
-		<Button id="LevelUpButton" onactivate="OnLevelUpClicked()">
-			<Panel id="LevelUpButtonInset">
-				<Label text="#LevelUp" />
+		<Button id="LevelUpStrButton" class="level_up could_level_up" onactivate="OnLevelUpClicked('str')">
+			<Panel id="LevelUpStrButtonInset" class="level_up_inset">
+				<Label text="+ Str" />
+			</Panel>
+		</Button>
+		<Button id="LevelUpDexButton" class="level_up could_level_up" onactivate="OnLevelUpClicked('dex')">
+			<Panel id="LevelUpDexButtonInset" class="level_up_inset">
+				<Label text="+ Dex" />
+			</Panel>
+		</Button>
+		<Button id="LevelUpIntButton" class="level_up could_level_up" onactivate="OnLevelUpClicked('int')">
+			<Panel id="LevelUpIntButtonInset" class="level_up_inset">
+				<Label text="+ Int" />
 			</Panel>
 		</Button>
 		<Panel id="ability_list" />

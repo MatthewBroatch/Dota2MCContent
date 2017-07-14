@@ -4,12 +4,15 @@ var m_AbilityPanels = []; // created up to a high-water mark, but reused when se
 
 function OnLevelUpClicked()
 {
+	$.Msg( Game.GetPlayerInfo( 0 ) )
 	if ( Game.IsInAbilityLearnMode() )
 	{
+		$.Msg( "Turn off" )
 		Game.EndAbilityLearnMode();
 	}
 	else
 	{
+		$.Msg( "Turn on" )
 		Game.EnterAbilityLearnMode();
 	}
 }

@@ -1,4 +1,7 @@
 <root>
+	<scripts>
+		<include src="file://{resources}/scripts/custom_game/disable_ui.js" />
+	</scripts>
 	<Panel>
 		<CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/action_bar.xml" />
 		<CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/inventory.xml" />

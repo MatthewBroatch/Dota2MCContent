@@ -5,7 +5,7 @@ var m_AbilityPanels = []; // created up to a high-water mark, but reused when se
 function OnLevelUpClicked()
 {
 	var queryUnit = Players.GetLocalPlayerPortraitUnit();
-	$.Msg(queryUnit);
+	GameEvents.SendCustomGameEventToServer( "increase_hero_stat", { "hero" : queryUnit, "stat" : "str" } );
 	UpdateAbilityList();
 }
 

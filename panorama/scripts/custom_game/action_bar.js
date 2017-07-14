@@ -4,17 +4,9 @@ var m_AbilityPanels = []; // created up to a high-water mark, but reused when se
 
 function OnLevelUpClicked()
 {
-	$.Msg( Game.GetPlayerInfo( 0 ) )
-	if ( Game.IsInAbilityLearnMode() )
-	{
-		$.Msg( "Turn off" )
-		Game.EndAbilityLearnMode();
-	}
-	else
-	{
-		$.Msg( "Turn on" )
-		Game.EnterAbilityLearnMode();
-	}
+	var queryUnit = Players.GetLocalPlayerPortraitUnit();
+	$.Msg(queryUnit);
+	UpdateAbilityList();
 }
 
 function OnAbilityLearnModeToggled( bEnabled )
@@ -35,7 +27,9 @@ function UpdateAbilityList()
 	var bPointsToSpend = ( nRemainingPoints > 0 );
 	var bControlsUnit = Entities.IsControllableByPlayer( queryUnit, Game.GetLocalPlayerID() );
 	$.GetContextPanel().SetHasClass( "could_level_up", ( bControlsUnit && bPointsToSpend ) );
-
+	var pointsLabel = $( "#points" );
+	pointsLabel.text = "Points to spend:" + nRemainingPoints;
+	$.Msg($.GetContextPanel());
 	// update all the panels
 	var nUsedPanels = 0;
 	for ( var i = 0; i < Entities.GetAbilityCount( queryUnit ); ++i )
@@ -57,7 +51,7 @@ function UpdateAbilityList()
 
 		// update the panel for the current unit / ability
 		var abilityPanel = m_AbilityPanels[ nUsedPanels ];
-		abilityPanel.data().SetAbility( ability, queryUnit, Game.IsInAbilityLearnMode() );
+		// abilityPanel.data().SetAbility( ability, queryUnit, Game.IsInAbilityLearnMode() );
 		
 		nUsedPanels++;
 	}
@@ -72,7 +66,7 @@ function UpdateAbilityList()
 
 (function()
 {
-    $.RegisterForUnhandledEvent( "DOTAAbility_LearnModeToggled", OnAbilityLearnModeToggled);
+  $.RegisterForUnhandledEvent( "DOTAAbility_LearnModeToggled", OnAbilityLearnModeToggled);
 
 	GameEvents.Subscribe( "dota_portrait_ability_layout_changed", UpdateAbilityList );
 	GameEvents.Subscribe( "dota_player_update_selected_unit", UpdateAbilityList );

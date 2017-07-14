@@ -7,6 +7,9 @@
 		<include src="file://{resources}/scripts/custom_game/action_bar.js" />
 	</scripts>
 	<Panel class="AbilityOverlayRoot">
+		<Panel>
+			<Label id="points" text="Points to spend: 1" />
+		</Panel>
 		<Button id="LevelUpStrButton" class="level_up could_level_up" onactivate="OnLevelUpClicked('str')">
 			<Panel id="LevelUpStrButtonInset" class="level_up_inset">
 				<Label text="+ Str" />

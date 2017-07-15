@@ -1,0 +1,89 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/dotastyles.css" />
+		<include src="file://{resources}/styles/custom_game/stats.css" />
+		<include src="file://{resources}/styles/custom_game/health_and_mana.css" />
+	</styles>
+	<scripts>
+		<include src="file://{resources}/scripts/custom_game/health_and_mana.js" />
+	</scripts>
+	<Panel class="stats-container" hittest="false">
+	<Panel class="stats">
+		<Panel class="stats-inner">
+			<Panel id="damage" class="stat">
+					<Panel class="stats-icon-container">
+						<Image class="stats-icon" src="file://{images}/hud/reborn/icon_damage.psd" />
+					</Panel>
+					<Label id="damage-label" text="2.1" />
+				</Panel>
+				<Panel id="armor" class="stat">
+					<Panel class="stats-icon-container">
+						<Image class="stats-icon" src="file://{images}/hud/reborn/icon_armor.psd" />
+					</Panel>
+					<Label id="armor-label" text="2.1" />
+				</Panel>
+				<Panel id="movespeed" class="stat">
+					<Panel class="stats-icon-container">
+						<Image class="stats-icon" src="file://{images}/hud/reborn/icon_speed.psd" />
+					</Panel>
+					<Label id="movespeed-label" text="2.1" />
+				</Panel>
+			</Panel>
+		</Panel>
+		<Panel id="health-and-mana">
+			<Panel id="health">
+				<Panel id="health-inset">
+					<Panel id="health-percent" style="width: 30%;" />				
+					<Label id="health-regen" text="+2.1" />
+					<Label id="health-total" text="560/560" />
+				</Panel>
+			</Panel>
+			<Panel id="mana">
+				<Panel id="mana-inset">
+					<Panel id="mana-percent" />
+					<Label id="mana-regen" text="+2.1" />
+					<Label id="mana-total" text="372/372" />
+				</Panel>
+			</Panel>
+		</Panel>
+		<Panel class="stats">
+			<Panel class="stats-inner">
+				<Panel id="strength" class="stat">
+					<Panel class="stats-icon-container">
+						<Image class="stats-icon" src="file://{images}/primary_attribute_icons/primary_attribute_icon_strength.psd" />
+					</Panel>
+					<Label id="strength-label" text="2.1" />
+				</Panel>
+				<Panel id="agility" class="stat">
+					<Panel class="stats-icon-container">
+						<Image class="stats-icon" src="file://{images}/primary_attribute_icons/primary_attribute_icon_agility.psd" />
+					</Panel>
+					<Label id="agility-label" text="2.1" />
+				</Panel>
+				<Panel id="intelligence" class="stat">
+					<Panel class="stats-icon-container">
+						<Image class="stats-icon" src="file://{images}/primary_attribute_icons/primary_attribute_icon_intelligence.psd" />
+					</Panel>
+					<Label id="intelligence-label" text="2.1" />
+				</Panel>
+			</Panel>
+		</Panel>
+		<Panel id="LevelUpButtons">
+			<Button id="LevelUpStrButton" class="level_up could_level_up" onactivate="OnLevelUpClicked('str')">
+				<Panel id="LevelUpStrButtonInset" class="level_up_inset">
+					<Label text="+" />
+				</Panel>
+			</Button>
+			<Button id="LevelUpDexButton" class="level_up could_level_up" onactivate="OnLevelUpClicked('dex')">
+				<Panel id="LevelUpDexButtonInset" class="level_up_inset">
+					<Label text="+" />
+				</Panel>
+			</Button>
+			<Button id="LevelUpIntButton" class="level_up could_level_up" onactivate="OnLevelUpClicked('int')">
+				<Panel id="LevelUpIntButtonInset" class="level_up_inset">
+					<Label text="+" />
+				</Panel>
+			</Button>
+		</Panel>
+	</Panel>
+</root>

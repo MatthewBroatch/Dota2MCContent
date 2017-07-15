@@ -1,0 +1,103 @@
+.stats {
+  background-color: gradient( linear, 0% 0%, 0% 100%, from( rgba(80, 80, 80, 0.5) ), to( rgba(0, 0, 0, 0.8) ) );
+  flow-children: down;
+  padding: 2px;  
+  vertical-align: bottom;
+  horizontal-align: right;
+  border-radius: 4px;
+}
+
+.stats-inner {
+  border: 4px solid black;
+  border-radius: 4px;
+  padding: 4px;
+  flow-children: down;
+}
+
+.stat {
+  flow-children: left;
+  padding: 2px;
+}
+
+.stats-icon-container {
+  height: 18px;
+  width: 18px;
+  margin-left: 5px;
+}
+
+.stats-inner Label {
+  font-size: 16px;
+}
+
+#LevelUpButtons {
+  margin-bottom: 7px;
+  horizontal-align: center;
+	vertical-align: bottom;
+	flow-children: down;
+}
+
+#LevelUpStrButton, #LevelUpDexButton, #LevelUpIntButton,
+{
+	border: 1px solid black;
+	background-color: #c4a529;
+	width: 24px;
+	height: 24px;
+	border-radius: 4px;
+	margin: 1px;
+}
+
+#LevelUpStrButton
+{
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( rgba(255, 0, 0, 0.8) ), to( rgba(160, 0, 0, 0.8) ) );
+}
+
+#LevelUpDexButton
+{
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( rgba(0, 205, 0, 0.8) ), to( rgba(0, 160, 0, 0.8) ) );
+}
+
+#LevelUpIntButton
+{
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( rgba(0, 0, 255, 0.8) ), to( rgba(0, 0, 160, 0.8) ) );
+}
+
+.could_level_up
+{
+	visibility: visible;
+}
+
+#LevelUpStrButton:hover
+{
+	background-color: darkred;
+}
+
+#LevelUpDexButton:hover
+{
+	background-color: darkgreen;
+}
+
+#LevelUpIntButton:hover
+{
+	background-color: darkblue;
+}
+
+.level_up .level_up_inset
+{
+	width: 100%;
+	height: 100%;
+	border-radius: 4px;
+	border: 2px solid black;
+	margin: 1px;
+}
+
+.level_up Label
+{
+	font-size: 18px;
+	margin-left: 3px;
+	margin-top: -5px;
+	text-transform: uppercase;
+	text-shadow: 0px 1px 3px 2.5 #000000;
+	color: white;
+	vertical-align: center;
+	horizontal-align: center;
+}

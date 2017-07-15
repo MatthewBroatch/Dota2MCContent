@@ -1,0 +1,82 @@
+.stats-container {
+  horizontal-align: center;
+  vertical-align: bottom;
+  flow-children: left;
+}
+
+#health-and-mana {
+  vertical-align: bottom;
+  flow-children: down;
+}
+
+#health, #mana {
+  background-color: black;
+  width: 400px;
+  padding: 1px;
+  height: 50px;
+  overflow: clip;
+  border-radius: 10px;
+  border: 1px solid #111;
+}
+
+#mana {
+  height: 35px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+#health-inset, #mana-inset {
+  background-color: #272823;
+  height: 100%;
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid #111;
+}
+
+#health-regen, #mana-regen {
+  width: 60px;
+  height: 100%;
+  horizontal-align: right;
+  text-align: right;
+  font-size: 14px;
+  margin-right: 10px; 
+  line-height: 23px;
+}
+
+#health-total, #mana-total {
+  width: 200px;
+  height: 100%;
+  horizontal-align: center;
+  text-align: center;
+  font-size: 20px;
+  margin-right: 10px; 
+  line-height: 26px;
+}
+
+#health-regen {
+  line-height: 30px;
+}
+#health-total {
+  line-height: 34px;
+}
+#health-regen, #mana-regen, #health-total, #mana-total {
+  color: white;
+}
+#health-regen, #mana-regen {
+  opacity: 0.6;
+}
+
+#health-percent {
+  height: 100%;
+   width: 100%; 
+  overflow: clip;
+	vertical-align: bottom;
+  background-color: gradient( linear, 0% 0%, 0% 100%, from( rgba(255, 0, 0, 0.8) ), to( rgba(160, 0, 0, 0.8) ) );
+}
+#mana-percent {
+  height: 100%;
+  width: 100%;
+  overflow: clip;
+	vertical-align: bottom;
+  background-color: gradient( linear, 0% 0%, 0% 100%, from( rgba(0, 0, 255, 0.8) ), to( rgba(0, 0, 160, 0.8) ) );
+} 

@@ -27,9 +27,8 @@ function UpdateAbilityList()
 	var bPointsToSpend = ( nRemainingPoints > 0 );
 	var bControlsUnit = Entities.IsControllableByPlayer( queryUnit, Game.GetLocalPlayerID() );
 	$.GetContextPanel().SetHasClass( "could_level_up", ( bControlsUnit && bPointsToSpend ) );
-	var pointsLabel = $( "#points" );
-	pointsLabel.text = "Points to spend:" + nRemainingPoints;
-	$.Msg($.GetContextPanel());
+	// var pointsLabel = $( "#points" );
+	// pointsLabel.text = "Points to spend:" + nRemainingPoints;
 	// update all the panels
 	var nUsedPanels = 0;
 	for ( var i = 0; i < Entities.GetAbilityCount( queryUnit ); ++i )

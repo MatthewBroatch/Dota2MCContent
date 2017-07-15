@@ -82,10 +82,6 @@ function UpdateHealthAndMana()
 	$( "#damage-label" ).text = (Entities.GetDamageMax( queryUnit ) + Entities.GetDamageMin( queryUnit )) / 2 + Entities.GetDamageBonus( queryUnit );
 	$( "#armor-label" ).text = Math.round((Entities.GetPhysicalArmorValue( queryUnit ) + Entities.GetBonusPhysicalArmor( queryUnit )) * 10) / 10;
 	$( "#movespeed-label" ).text = Entities.GetBaseMoveSpeed( queryUnit );
-	// $( "#strength-label" ).text = Entities.GetStrength( queryUnit );
-	if(Entities.IsHero( queryUnit )) {
-		// $.Msg(Game.GetPlayerInfo( 0 ));
-	}
 }
 
 function UpdateHealthAndMana2()
@@ -94,17 +90,34 @@ function UpdateHealthAndMana2()
 	$.Msg("WOWO");
 }
 
+function SendMeStats() {
+	var queryUnit = Players.GetLocalPlayerPortraitUnit();
+    var player = Players.GetLocalPlayer()
+    GameEvents.SendCustomGameEventToServer( "get_unit_stats", { "player" : player, "unit" : queryUnit } );
+}
+
+function GetMeStats( event_data )
+{
+	$( "#strength-label" ).text = event_data.str;
+	$( "#agility-label" ).text = event_data.agi;
+	$( "#intelligence-label" ).text = event_data.int;
+}
+ 
+
 (function()
 {
   // $.RegisterForUnhandledEvent( "DOTAAbility_LearnModeToggled", OnAbilityLearnModeToggled);
 
 	GameEvents.Subscribe( "dota_player_update_selected_unit", UpdateHealthAndMana );
+	GameEvents.Subscribe( "dota_player_update_selected_unit", SendMeStats );
+    GameEvents.Subscribe( "send_player_stats", GetMeStats);
 	GameEvents.Subscribe( "player_info_updated", UpdateHealthAndMana2 );
 	// GameEvents.Subscribe( "dota_player_update_selected_unit", UpdateAbilityList );
 	// GameEvents.Subscribe( "dota_player_update_query_unit", UpdateAbilityList );
 	// GameEvents.Subscribe( "dota_ability_changed", UpdateAbilityList );
 	GameEvents.Subscribe( "dota_hero_ability_points_changed", CheckAbilityPointsState );
     
+    SendMeStats();
     CheckAbilityPointsState();
 
 	$.Every(0, -1, 0.33,  function() { UpdateHealthAndMana() }, 100); // initial update

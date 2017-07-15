@@ -7,11 +7,8 @@
 		<include src="file://{resources}/scripts/custom_game/inventory.js" />
 	</scripts>
 	<Panel class="InventoryOverlayRoot" hittest="false">
-		<Panel id="stash_row" />
-		<Panel id="inventory_items">
-			<Panel id="inventory_row_1" />
-			<Panel id="inventory_row_2" />
-		</Panel>
+		<Panel id="inventory" />
+		<Panel id="stash" />
 	</Panel>
 </root>
 

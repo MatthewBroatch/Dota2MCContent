@@ -30,7 +30,7 @@ $.Every = function(start, time, tick, func){
                 numRan++;
                 delay = (startTime+tickRate*numRan)-Game.Time();
                 if((startTime+tickRate*numRan)-Game.Time() < 0){
-                    $.Msg('[ERROR] Function ' + func + ' taking too long to loop!')
+                    // $.Msg('[ERROR] Function ' + func + ' taking too long to loop!')
                     delay = 0;
                 }
                 $.Schedule(delay, function(){
@@ -98,9 +98,16 @@ function SendMeStats() {
 
 function GetMeStats( event_data )
 {
-	$( "#strength-label" ).text = event_data.str;
-	$( "#agility-label" ).text = event_data.agi;
-	$( "#intelligence-label" ).text = event_data.int;
+    if (event_data.str) {
+        $( "#strength-label" ).text = event_data.str;
+        $( "#agility-label" ).text = event_data.agi;
+        $( "#intelligence-label" ).text = event_data.int;
+    }
+    else {
+        $( "#strength-label" ).text = "-";
+        $( "#agility-label" ).text = "-";
+        $( "#intelligence-label" ).text = "-";
+    }
 }
  
 
@@ -109,7 +116,9 @@ function GetMeStats( event_data )
   // $.RegisterForUnhandledEvent( "DOTAAbility_LearnModeToggled", OnAbilityLearnModeToggled);
 
 	GameEvents.Subscribe( "dota_player_update_selected_unit", UpdateHealthAndMana );
-	GameEvents.Subscribe( "dota_player_update_selected_unit", SendMeStats );
+    GameEvents.Subscribe( "dota_player_update_selected_unit", SendMeStats );
+    GameEvents.Subscribe( "dota_inventory_changed", SendMeStats );
+	GameEvents.Subscribe( "dota_inventory_item_changed", SendMeStats );
     GameEvents.Subscribe( "send_player_stats", GetMeStats);
 	GameEvents.Subscribe( "player_info_updated", UpdateHealthAndMana2 );
 	// GameEvents.Subscribe( "dota_player_update_selected_unit", UpdateAbilityList );

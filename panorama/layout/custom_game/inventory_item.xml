@@ -15,6 +15,7 @@
 				ondblclick="DoubleClickItem()"
 				oncontextmenu="RightClickItem()"
 				>
+			<Image id="InventoryIcon" />
 			<DOTAItemImage hittest="false" id="ItemImage" />
 			<Panel hittest="false" id="Cooldown">
 				<Panel hittest="false" id="CooldownOverlay" />

@@ -1,43 +1,26 @@
 .InventoryOverlayRoot
 {
 	horizontal-align: right;
-	vertical-align: bottom;
-	margin-bottom: 650px;
+	vertical-align: center;
 	margin-right: 20px;
 	
-	flow-children: down;
+	flow-children: left;
 }
 
-#inventory_items
+#stash, #inventory
 {
 	flow-children: down;
-	border: 2px solid black;
-}
-
-#stash_row
-{
-	flow-children: right;
-	background-color: #222222;
+	background-color: #22222277;
 	margin-bottom: 32px;
 	border: 2px solid black;
 }
 
-#inventory_row_1
-{
-	flow-children: right;
-	background-color: #222222;
-}
-
-#inventory_row_2
-{
-	flow-children: right;
-	background-color: #222222;
-}
-
 .ItemPanel
 {
-	width: 88px;
-	height: 64px;
+	/* width: 88px; */
+	width: 44px;
+	/* height: 64px; */
+	height: 32px;
 	margin-top: 4px;
 	margin-bottom: 4px;
 	margin-left: 4px;

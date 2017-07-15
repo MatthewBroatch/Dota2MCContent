@@ -74,7 +74,7 @@
 					<Label text="+" />
 				</Panel>
 			</Button>
-			<Button id="LevelUpDexButton" class="level_up could_level_up" onactivate="OnLevelUpClicked('dex')">
+			<Button id="LevelUpDexButton" class="level_up could_level_up" onactivate="OnLevelUpClicked('agi')">
 				<Panel id="LevelUpDexButtonInset" class="level_up_inset">
 					<Label text="+" />
 				</Panel>

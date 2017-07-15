@@ -13,40 +13,34 @@ function UpdateInventory()
 	{
 		var inventoryPanel = m_InventoryPanels[i]
 		var item = Entities.GetItemInSlot( queryUnit, i );
-		inventoryPanel.data().SetItem( queryUnit, item );
+		inventoryPanel.SetItem( queryUnit, item );
 	}
 }
 
 function CreateInventoryPanels()
 {
-	var stashPanel = $( "#stash_row" );
-	var firstRowPanel = $( "#inventory_row_1" );
-	var secondRowPanel = $( "#inventory_row_2" );
-	if ( !stashPanel || !firstRowPanel || !secondRowPanel )
+	var stashPanel = $( "#stash" );
+	var inventoryPanel = $( "#inventory" );
+	if ( !stashPanel || !inventoryPanel )
 		return;
 
 	stashPanel.RemoveAndDeleteChildren();
-	firstRowPanel.RemoveAndDeleteChildren();
-	secondRowPanel.RemoveAndDeleteChildren();
+	inventoryPanel.RemoveAndDeleteChildren();
 	m_InventoryPanels = []
 
 	for ( var i = 0; i < DOTA_ITEM_STASH_MAX; ++i )
 	{
-		var parentPanel = firstRowPanel;
-		if ( i >= DOTA_ITEM_STASH_MIN )
+		var parentPanel = inventoryPanel;
+		if ( i >= DOTA_ITEM_STASH_MIN ) 
 		{
 			parentPanel = stashPanel;
 		}
-		else if ( i > 2 )
-		{
-			parentPanel = secondRowPanel;
-		}
 
-		var inventoryPanel = $.CreatePanel( "Panel", parentPanel, "" );
-		inventoryPanel.BLoadLayout( "file://{resources}/layout/custom_game/inventory_item.xml", false, false );
-		inventoryPanel.data().SetItemSlot( i );
+		var inventoryItemPanel = $.CreatePanel( "Panel", parentPanel, "" );
+		inventoryItemPanel.BLoadLayout( "file://{resources}/layout/custom_game/inventory_item.xml", false, false );
+		inventoryItemPanel.SetItemSlot( i );
 
-		m_InventoryPanels.push( inventoryPanel );
+		m_InventoryPanels.push( inventoryItemPanel );
 	}
 }
 

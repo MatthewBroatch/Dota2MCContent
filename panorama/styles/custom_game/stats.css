@@ -36,7 +36,7 @@
 	flow-children: down;
 }
 
-#LevelUpStrButton, #LevelUpDexButton, #LevelUpIntButton,
+#LevelUpStrButton, #LevelUpDexButton, #LevelUpIntButton
 {
 	border: 1px solid black;
 	background-color: #c4a529;
@@ -44,6 +44,7 @@
 	height: 24px;
 	border-radius: 4px;
 	margin: 1px;
+	 visibility: collapse; 
 }
 
 #LevelUpStrButton
@@ -61,7 +62,7 @@
 	background-color: gradient( linear, 0% 0%, 0% 100%, from( rgba(0, 0, 255, 0.8) ), to( rgba(0, 0, 160, 0.8) ) );
 }
 
-.could_level_up
+#LevelUpStrButton.could_level_up, #LevelUpDexButton.could_level_up, #LevelUpIntButton.could_level_up
 {
 	visibility: visible;
 }

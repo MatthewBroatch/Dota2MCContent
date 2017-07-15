@@ -52,19 +52,19 @@
 					<Panel class="stats-icon-container">
 						<Image class="stats-icon" src="file://{images}/primary_attribute_icons/primary_attribute_icon_strength.psd" />
 					</Panel>
-					<Label id="strength-label" text="2.1" />
+					<Label id="strength-label" text="1" />
 				</Panel>
 				<Panel id="agility" class="stat">
 					<Panel class="stats-icon-container">
 						<Image class="stats-icon" src="file://{images}/primary_attribute_icons/primary_attribute_icon_agility.psd" />
 					</Panel>
-					<Label id="agility-label" text="2.1" />
+					<Label id="agility-label" text="1" />
 				</Panel>
 				<Panel id="intelligence" class="stat">
 					<Panel class="stats-icon-container">
 						<Image class="stats-icon" src="file://{images}/primary_attribute_icons/primary_attribute_icon_intelligence.psd" />
 					</Panel>
-					<Label id="intelligence-label" text="2.1" />
+					<Label id="intelligence-label" text="1" />
 				</Panel>
 			</Panel>
 		</Panel>

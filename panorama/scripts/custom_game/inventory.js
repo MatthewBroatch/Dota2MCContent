@@ -9,7 +9,7 @@ var DOTA_ITEM_STASH_MAX = 12;
 function UpdateInventory()
 {
 	var queryUnit = Players.GetLocalPlayerPortraitUnit();
-	for ( var i = 0; i < DOTA_ITEM_STASH_MAX; ++i )
+	for ( var i = 0; i < DOTA_ITEM_STASH_MAX; ++i ) 
 	{
 		var inventoryPanel = m_InventoryPanels[i]
 		var item = Entities.GetItemInSlot( queryUnit, i );
@@ -57,4 +57,3 @@ function CreateInventoryPanels()
 	GameEvents.Subscribe( "dota_player_update_selected_unit", UpdateInventory );
 	GameEvents.Subscribe( "dota_player_update_query_unit", UpdateInventory );
 })();
-

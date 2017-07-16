@@ -1,0 +1,21 @@
+<root>
+	<styles>
+    <include src="file://{resources}/styles/dotastyles.css" />
+		<include src="file://{resources}/styles/custom_game/spell_slots.css" />
+	</styles>
+	<scripts>
+		<include src="file://{resources}/scripts/custom_game/spell_slots.js" />
+	</scripts>
+	<Panel class="spell-slots" hittest="false">
+		<Panel id="spell-slots-inner" />
+    <Button id="known-spells-button" onactivate="ShowSpells()" >
+      <Panel id="known-spells-button-inner">
+        <Label text="SPELLS" />
+      </Panel>
+    </Button>
+    <Panel id="known-spells">
+      <Panel id="known-spells-inner">
+      </Panel>
+    </Panel>
+	</Panel>
+</root>

@@ -38,24 +38,33 @@ function UpdateAbility()
 	var hotkey = Abilities.GetKeybind( m_Ability, m_QueryUnit );
 	var unitMana = Entities.GetMana( m_QueryUnit );
 
+	var isValid = manaCost !== -1;
+
 	$.GetContextPanel().SetHasClass( "no_level", noLevel );
-	$.GetContextPanel().SetHasClass( "is_passive", Abilities.IsPassive(m_Ability) );
+	$.GetContextPanel().SetHasClass( "is_passive", Abilities.IsPassive(m_Ability) && isValid );
 	$.GetContextPanel().SetHasClass( "no_mana_cost", ( 0 == manaCost ) );
 	$.GetContextPanel().SetHasClass( "insufficient_mana", ( manaCost > unitMana ) );
-	$.GetContextPanel().SetHasClass( "auto_cast_enabled", Abilities.GetAutoCastState(m_Ability) );
-	$.GetContextPanel().SetHasClass( "toggle_enabled", Abilities.GetToggleState(m_Ability) );
-	$.GetContextPanel().SetHasClass( "is_active", ( m_Ability == Abilities.GetLocalPlayerActiveAbility() ) );
+	$.GetContextPanel().SetHasClass( "auto_cast_enabled", Abilities.GetAutoCastState(m_Ability) && isValid );
+	$.GetContextPanel().SetHasClass( "toggle_enabled", Abilities.GetToggleState(m_Ability) && isValid );
+	$.GetContextPanel().SetHasClass( "is_active", ( m_Ability == Abilities.GetLocalPlayerActiveAbility() ) && isValid );
 
-	abilityButton.enabled = ( isCastable || m_bInLevelUp );
+	abilityButton.enabled = ( isCastable || m_bInLevelUp && !isValid );
 	
 	$( "#HotkeyText" ).text = hotkey;
 	
 	$( "#AbilityImage" ).abilityname = abilityName;
 	$( "#AbilityImage" ).contextEntityIndex = m_Ability;
+	if(isValid)
+		$( "#ManaCost" ).text = manaCost;
+	else 
+		$( "#ManaCost" ).text = "";
+
+	if(isValid)
+		$( "#Hotkey" ).SetHasClass("collapse", false);
+	else 
+		$( "#Hotkey" ).SetHasClass("collapse", true);
 	
-	$( "#ManaCost" ).text = manaCost;
-	
-	if ( Abilities.IsCooldownReady( m_Ability ) )
+	if ( Abilities.IsCooldownReady( m_Ability ) || !isValid )
 	{
 		$.GetContextPanel().SetHasClass( "cooldown_ready", true );
 		$.GetContextPanel().SetHasClass( "in_cooldown", false );
@@ -70,7 +79,6 @@ function UpdateAbility()
 		$( "#CooldownTimer" ).text = Math.ceil( cooldownRemaining );
 		$( "#CooldownOverlay" ).style.width = cooldownPercent+"%";
 	}
-	
 }
 
 function AbilityShowTooltip()
@@ -133,7 +141,7 @@ function RebuildAbilityUI()
 
 (function()
 {
-	$.GetContextPanel().data().SetAbility = SetAbility;
+	$.GetContextPanel().SetAbility = SetAbility;
 	GameEvents.Subscribe( "dota_ability_changed", RebuildAbilityUI ); // major rebuild
 	AutoUpdateAbility(); // initial update of dynamic state
 })();

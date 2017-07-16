@@ -1,0 +1,73 @@
+.spell-slots {
+  vertical-align: bottom;
+	horizontal-align: center;
+	flow-children: up;
+	 margin-bottom:100px; 
+}
+
+#spell-slots-inner {
+	flow-children: right;
+}
+
+.spell-slot {
+  width: 60px;
+	height: 60px;
+	border-radius: 60px;
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( rgba(80, 80, 80, 0.5) ), to( rgba(0, 0, 0, 0.8) ) );
+	overflow: squish;
+	padding: 2px;
+	margin: 10px;
+}
+
+.spell-slot-inner {
+  width: 60px;
+	height: 60px;
+	border-radius: 60px;
+	overflow: squish;
+	border: 2px solid black;
+}
+
+#Hotkey.collaspe {
+	min-width: 0px;
+	min-height: 0px;
+	width: 0;
+	height: 0;
+	visibility: collapse;
+}
+
+#known-spells-button {
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( rgba(80, 80, 80, 0.5) ), to( rgba(0, 0, 0, 0.8) ) );
+	padding: 2px;
+	border-radius: 4px;
+}
+
+#known-spells-button:hover {
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( rgba(160, 160, 160, 0.5) ), to( rgba(80, 80, 80, 0.8) ) );
+	padding: 2px;
+	border-radius: 4px;
+}
+
+
+#known-spells-button-inner {
+	border: 2px solid black;
+	border-radius: 4px;
+}
+
+#known-spells {
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( rgba(80, 80, 80, 0.5) ), to( rgba(0, 0, 0, 0.8) ) );
+	padding: 2px;
+	border-radius: 4px;
+	min-width: 400px;
+	min-height: 80px;
+	visibility: collapse;
+}
+#known-spells.is_active {
+	visibility: visible;
+}
+
+#known-spells-inner {
+	border: 2px solid black;
+	border-radius: 4px;
+	min-width: 400px;
+	min-height: 80px;
+}

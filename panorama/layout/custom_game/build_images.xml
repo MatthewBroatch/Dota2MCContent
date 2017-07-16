@@ -1,0 +1,12 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/custom_game/build_images.css" />
+	</styles>
+	<scripts>
+	</scripts>
+	<Panel class="build-images" hittest="false" visibility="collapse">
+		<Image src="file://{images}/armour.png" visibility="collapse" />				
+		<Image src="file://{images}/helmet.png" visibility="collapse" />		
+		<Image src="file://{images}/cape.png" visibility="collapse" />		 
+	</Panel>
+</root>

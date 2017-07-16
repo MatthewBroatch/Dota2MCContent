@@ -3,16 +3,8 @@
 	horizontal-align: right;
 	vertical-align: center;
 	margin-right: 20px;
-	
-	flow-children: left;
-}
 
-#stash, #inventory
-{
-	flow-children: down;
-	background-color: #22222277;
-	margin-bottom: 32px;
-	border: 2px solid black;
+	flow-children: right;
 }
 
 .ItemPanel
@@ -25,6 +17,7 @@
 	margin-bottom: 4px;
 	margin-left: 4px;
 	margin-right: 4px;
+	border-bottom: 1px solid black;
 }
 
 .Charges
@@ -174,4 +167,29 @@
 .bMoveToStash #MoveToStash
 {
 	visibility: visible;
+}
+
+.container {
+  background-color: gradient( linear, 0% 0%, 0% 100%, from( rgba(80, 80, 80, 0.5) ), to( rgba(0, 0, 0, 0.8) ) );
+  flow-children: down;
+  padding: 2px;
+  vertical-align: bottom;
+  horizontal-align: right;
+  border-radius: 4px;
+}
+
+.inner {
+  border: 4px solid black;
+  border-radius: 4px;
+  padding: 4px;
+  flow-children: down;
+}
+
+#InventoryIcon {
+	margin-left: 7px;
+	horizontal-align: center;
+}
+
+#ItemImage {
+	border-radius: 8px;
 }

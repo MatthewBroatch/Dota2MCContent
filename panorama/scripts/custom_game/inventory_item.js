@@ -47,11 +47,6 @@ function UpdateItem()
 	$( "#ChargeCount" ).text = chargeCount;
 	$( "#AltChargeCount" ).text = altChargeCount;
 
-	if( m_Item == -1 && m_ItemSlot == 2 ) {
-		$.Msg(m_ItemSlot);
-		$( "#InventoryIcon" ).src = "file://{images}/hud/reborn/icon_damage.psd";
-	}
-
 	if ( m_Item == -1 || Abilities.IsCooldownReady( m_Item ) )
 	{
 		$.GetContextPanel().SetHasClass( "cooldown_ready", true );
@@ -242,12 +237,28 @@ function OnDragEnd( panelId, draggedPanel )
 function SetItemSlot( itemSlot )
 {
 	m_ItemSlot = itemSlot;
+	Initialise();
 }
 
 function SetItem( queryUnit, iItem )
 {
 	m_Item = iItem;
 	m_QueryUnit = queryUnit;
+}
+
+function Initialise() {
+	if( m_ItemSlot == 0 )
+		$( "#InventoryIcon" ).SetImage("file://{images}/hud/reborn/icon_damage.psd");
+	if( m_ItemSlot == 1 )
+		$( "#InventoryIcon" ).SetImage("file://{images}/hud/reborn/icon_armor.psd");
+	if( m_ItemSlot == 2 )
+		$( "#InventoryIcon" ).SetImage("file://{images}/helmet.png");
+	if( m_ItemSlot == 3 ) 
+		$( "#InventoryIcon" ).SetImage("file://{images}/cape.png");
+	if( m_ItemSlot == 4 )
+		$( "#InventoryIcon" ).SetImage("file://{images}/armour.png");
+	if( m_ItemSlot == 5 )
+		$( "#InventoryIcon" ).SetImage("file://{images}/hud/reborn/icon_speed.psd");
 }
 
 (function()
@@ -264,6 +275,5 @@ function SetItem( queryUnit, iItem )
 	$.RegisterEventHandler( 'DragLeave', $.GetContextPanel(), OnDragLeave );
 	$.RegisterEventHandler( 'DragStart', $.GetContextPanel(), OnDragStart );
 	$.RegisterEventHandler( 'DragEnd', $.GetContextPanel(), OnDragEnd );
-
 	UpdateItem(); // initial update of dynamic state
 })();

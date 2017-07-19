@@ -6,8 +6,8 @@ function UpdateBuff( buffPanel, queryUnit, buffSerial )
 {
 	var noBuff = ( buffSerial == -1 );
 	buffPanel.SetHasClass( "no_buff", noBuff );
-	buffPanel.data().m_QueryUnit = queryUnit;
-	buffPanel.data().m_BuffSerial = buffSerial;
+	buffPanel.m_QueryUnit = queryUnit;
+	buffPanel.m_BuffSerial = buffSerial;
 	if ( noBuff )
 	{
 		return;

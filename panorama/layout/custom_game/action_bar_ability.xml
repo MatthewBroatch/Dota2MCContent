@@ -37,6 +37,11 @@
 			<Label id="HotkeyText" />
 		</Panel>
 		<Label id="ManaCost" />
+		<Button id="Remove"
+			onactivate="UnlearnAbility()"
+		  >
+			<Label text="X" />
+		</Button>
 	</Panel>
 </root>
 

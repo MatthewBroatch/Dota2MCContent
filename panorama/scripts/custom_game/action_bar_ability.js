@@ -139,6 +139,13 @@ function RebuildAbilityUI()
 	}
 }
 
+function UnlearnAbility(  )
+{
+	var player = Players.GetLocalPlayer();
+	var queryUnit = Players.GetLocalPlayerPortraitUnit();
+	GameEvents.SendCustomGameEventToServer( "unlearn_ability", { "player" : player, "unit" : queryUnit, "abilityName": Abilities.GetAbilityName( m_Ability ) } );
+}
+
 (function()
 {
 	$.GetContextPanel().SetAbility = SetAbility;

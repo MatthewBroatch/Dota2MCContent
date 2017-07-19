@@ -64,6 +64,9 @@
 #known-spells.is_active {
 	visibility: visible;
 }
+#known-spells-button.is_hidden {
+	visibility: collapse;
+}
 
 #known-spells-inner {
 	border: 2px solid black;

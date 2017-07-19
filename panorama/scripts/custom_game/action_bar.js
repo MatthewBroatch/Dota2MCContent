@@ -19,7 +19,7 @@ function UpdateAbilityList()
 	var abilityListPanel = $( "#ability_list" );
 	if ( !abilityListPanel )
 		return;
-
+	abilityListPanel.RemoveAndDeleteChildren();
 	var queryUnit = Players.GetLocalPlayerPortraitUnit();
 
 	// see if we can level up

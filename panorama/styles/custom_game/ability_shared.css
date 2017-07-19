@@ -74,7 +74,7 @@
 	box-shadow: fill black 1px 1px 2px 2px;
 }
 
-#HotkeyText
+#HotkeyText, #Remove Label
 {
 	color: #bba995;
  	text-shadow: 1px 1px 2px 2 #000000;
@@ -91,8 +91,17 @@
 .is_passive #Hotkey,
 #stash_row #Hotkey,
 .no_hotkey #Hotkey
+.no_level #Remove
 {
 	visibility: collapse;
 }
 
+#Remove {
+	vertical-align: top;
+	horizontal-align: right;
+	min-width: 18px;
+	min-height: 18px;
+	margin-right: 8px;
+	margin-top: 8px;
 
+}

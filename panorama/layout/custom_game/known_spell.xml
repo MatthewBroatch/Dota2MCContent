@@ -1,0 +1,28 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/custom_game/action_bar.css" />
+		<include src="file://{resources}/styles/custom_game/ability_shared.css" />
+		<include src="file://{resources}/styles/custom_game/spell_slots.css" />
+	</styles>
+	<scripts>
+		<include src="file://{resources}/scripts/custom_game/known_spell.js" />
+	</scripts>
+	<Panel class="AbilityPanel">
+		<Panel class="spell-slot">
+			<Panel class="spell-slot-inner">
+				<Panel id="ButtonAndLevel">
+					<Panel id="UpgradeBorder">
+						<Panel id="AbilityStatusBorder">
+							<Button id="AbilityButton"
+                    onactivate="LearnAbility()" >
+								<DOTAAbilityImage id="AbilityImage" />
+							</Button>
+						</Panel>
+					</Panel>
+				</Panel>
+			</Panel>
+		</Panel>
+	</Panel>
+</root>
+
+

@@ -1,21 +1,12 @@
 "use strict";
 
-var m_InventoryPanels = []
+var m_Wearing = []
+var m_Wearing = []
+var m_Inventory = []
 
 // Currently hardcoded: first 6 are inventory, next 6 are stash items
-var DOTA_ITEM_STASH_MIN = 6;
-var DOTA_ITEM_STASH_MAX = 12;
-
-function UpdateInventory()
-{
-	var queryUnit = Players.GetLocalPlayerPortraitUnit();
-	for ( var i = 0; i < DOTA_ITEM_STASH_MAX; ++i ) 
-	{
-		var inventoryPanel = m_InventoryPanels[i]
-		var item = Entities.GetItemInSlot( queryUnit, i );
-		inventoryPanel.SetItem( queryUnit, item );
-	}
-}
+var DOTA_ITEM_WEARING_MAX = 7;
+var DOTA_ITEM_INVENTORY_MAX = 16;
 
 function CreateInventoryPanels()
 {
@@ -24,36 +15,52 @@ function CreateInventoryPanels()
 	if ( !stashPanel || !inventoryPanel )
 		return;
 
+	var queryUnit = Players.GetLocalPlayerPortraitUnit();
 	stashPanel.RemoveAndDeleteChildren();
 	inventoryPanel.RemoveAndDeleteChildren();
-	m_InventoryPanels = []
 
-	for ( var i = 0; i < DOTA_ITEM_STASH_MAX; ++i )
+	for ( var i = 0; i < DOTA_ITEM_WEARING_MAX; ++i )
 	{
-		var parentPanel = inventoryPanel;
-		if ( i >= DOTA_ITEM_STASH_MIN ) 
-		{
-			parentPanel = stashPanel;
-		}
-
-		var inventoryItemPanel = $.CreatePanel( "Panel", parentPanel, "" );
+		var inventoryItemPanel = $.CreatePanel( "Panel", inventoryPanel, "" );
 		inventoryItemPanel.BLoadLayout( "file://{resources}/layout/custom_game/inventory_item.xml", false, false );
-		inventoryItemPanel.SetItemSlot( i );
-
-		m_InventoryPanels.push( inventoryItemPanel );
+		inventoryItemPanel.SetItem( queryUnit, m_Wearing[i] );
+	}
+	for ( var i = 0; i < DOTA_ITEM_INVENTORY_MAX; ++i )
+	{
+		var inventoryItemPanel = $.CreatePanel( "Panel", stashPanel, "" );
+		inventoryItemPanel.BLoadLayout( "file://{resources}/layout/custom_game/inventory_item.xml", false, false );
+		inventoryItemPanel.SetItem( queryUnit, m_Inventory[i] );
 	}
 }
 
+//GetIntrinsicModifierName
+function StoreItem(event) {
+	var found = 0;
+	var slot = undefined;
+	for(var i = 0; i < DOTA_ITEM_INVENTORY_MAX; i++) {
+		if(m_Inventory[i].item === undefined) {
+			slot = m_Inventory[i];
+			break;
+		}
+	}
+	if(!slot) {
+		var player = Players.GetLocalPlayer();
+		var queryUnit = Players.GetLocalPlayerPortraitUnit();
+		GameEvents.SendCustomGameEventToServer( "drop_item", { "player" : player, "unit" : queryUnit, "itemName": event.ItemName } );
+	} else {
+		slot.item = event;
+	}
+	CreateInventoryPanels();
+}
 
 (function()
 {
-	CreateInventoryPanels();
-	UpdateInventory();
 
-	GameEvents.Subscribe( "dota_inventory_changed", UpdateInventory );
-	GameEvents.Subscribe( "dota_inventory_item_changed", UpdateInventory );
-	GameEvents.Subscribe( "m_event_dota_inventory_changed_query_unit", UpdateInventory );
-	GameEvents.Subscribe( "m_event_keybind_changed", UpdateInventory );
-	GameEvents.Subscribe( "dota_player_update_selected_unit", UpdateInventory );
-	GameEvents.Subscribe( "dota_player_update_query_unit", UpdateInventory );
+	GameEvents.Subscribe( "hero_picked_up_item", StoreItem );
+	for(var i = 0; i < DOTA_ITEM_INVENTORY_MAX; i++)
+		m_Inventory.push({ item: undefined, slot: i, isWearing: false });
+	for(var i = 0; i < DOTA_ITEM_WEARING_MAX; i++)
+		m_Wearing.push({ item: undefined, slot: i, isWearing: true });
+	CreateInventoryPanels();
+
 })();

@@ -7,7 +7,7 @@
 	<scripts>
 		<include src="file://{resources}/scripts/custom_game/known_spell.js" />
 	</scripts>
-	<Panel class="AbilityPanel">
+	<Panel class="AbilityPanel" draggable="true">
 		<Panel class="spell-slot">
 			<Panel class="spell-slot-inner">
 				<Panel id="ButtonAndLevel">

@@ -146,9 +146,117 @@ function UnlearnAbility(  )
 	GameEvents.SendCustomGameEventToServer( "unlearn_ability", { "player" : player, "unit" : queryUnit, "abilityName": Abilities.GetAbilityName( m_Ability ) } );
 }
 
+
+function OnDragEnter( a, draggedPanel )
+{
+	// var draggedItem = draggedPanel.data().m_DragItem;
+	var draggedItem = draggedPanel.m_DragItem;
+
+	// only care about dragged items other than us
+	if ( draggedItem === null || draggedItem == m_Ability )
+		return true;
+
+	// highlight this panel as a drop target
+	$.GetContextPanel().AddClass( "potential_drop_target" );
+	return true;
+}
+
+function OnDragDrop( panelId, draggedPanel )
+{
+	// var draggedItem = draggedPanel.data().m_DragItem;
+	var draggedItem = draggedPanel.m_DragItem;
+	
+	// only care about dragged items other than us
+	if ( draggedItem === null )
+		return true;
+
+	// executing a slot swap - don't drop on the world
+	// draggedPanel.data().m_DragCompleted = true;
+	draggedPanel.m_DragCompleted = true;
+	
+	// item dropped on itself? don't acutally do the swap (but consider the drag completed)
+	if ( draggedItem == m_Ability )
+		return true;
+
+	// create the order
+	// var moveItemOrder =
+	// {
+	// 	OrderType: dotaunitorder_t.DOTA_UNIT_ORDER_MOVE_ITEM,
+	// 	TargetIndex: m_ItemSlot,
+	// 	AbilityIndex: draggedItem
+	// };
+	// Game.PrepareUnitOrders( moveItemOrder );
+	return true;
+}
+
+function OnDragLeave( panelId, draggedPanel )
+{
+	// var draggedItem = draggedPanel.data().m_DragItem;
+	var draggedItem = draggedPanel.m_DragItem;
+	if ( draggedItem === null || draggedItem == m_Ability )
+		return false;
+
+	// un-highlight this panel
+	$.GetContextPanel().RemoveClass( "potential_drop_target" );
+	return true;
+}
+
+function OnDragStart( panelId, dragCallbacks )
+{
+	if ( m_Ability == -1 )
+	{
+		return true;
+	}
+
+	var abilityName = Abilities.GetAbilityName( m_Ability );
+
+	ItemHideTooltip(); // tooltip gets in the way
+
+	// create a temp panel that will be dragged around
+	var displayPanel = $.CreatePanel( "DOTAItemImage", $.GetContextPanel(), "dragImage" );
+	displayPanel.itemname = abilityName;
+	displayPanel.contextEntityIndex = m_Ability;
+	displayPanel.m_DragItem = m_Ability;
+	displayPanel.m_DragCompleted = false; // whether the drag was successful
+	// displayPanel.data().m_DragItem = m_Item;
+	// displayPanel.data().m_DragCompleted = false; // whether the drag was successful
+
+	// hook up the display panel, and specify the panel offset from the cursor
+	dragCallbacks.displayPanel = displayPanel;
+	dragCallbacks.offsetX = 0;
+	dragCallbacks.offsetY = 0;
+	
+	// grey out the source panel while dragging
+	$.GetContextPanel().AddClass( "dragging_from" );
+	return true;
+}
+
+function OnDragEnd( panelId, draggedPanel )
+{
+	// if the drag didn't already complete, then try dropping in the world
+	// if ( !draggedPanel.data().m_DragCompleted )
+	if ( !draggedPanel.m_DragCompleted )
+	{
+		// Game.DropItemAtCursor( m_QueryUnit, m_Item );
+	}
+
+	// kill the display panel
+	draggedPanel.DeleteAsync( 0 );
+
+	// restore our look
+	$.GetContextPanel().RemoveClass( "dragging_from" );
+	return true;
+}
+
 (function()
 {
 	$.GetContextPanel().SetAbility = SetAbility;
 	GameEvents.Subscribe( "dota_ability_changed", RebuildAbilityUI ); // major rebuild
+
+	$.RegisterEventHandler( 'DragEnter', $.GetContextPanel(), OnDragEnter );
+	$.RegisterEventHandler( 'DragDrop', $.GetContextPanel(), OnDragDrop );
+	$.RegisterEventHandler( 'DragLeave', $.GetContextPanel(), OnDragLeave );
+	$.RegisterEventHandler( 'DragStart', $.GetContextPanel(), OnDragStart );
+	$.RegisterEventHandler( 'DragEnd', $.GetContextPanel(), OnDragEnd );
 	AutoUpdateAbility(); // initial update of dynamic state
 })();

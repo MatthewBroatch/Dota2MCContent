@@ -48,7 +48,8 @@ $.Every = function(start, time, tick, func){
 
 function OnLevelUpClicked(stat)
 {
-	var queryUnit = Players.GetLocalPlayerPortraitUnit();
+    var queryUnit = Players.GetLocalPlayerPortraitUnit();
+    $.Msg("increase_hero_stat");
     GameEvents.SendCustomGameEventToServer( "increase_hero_stat", { "hero" : queryUnit, "stat" : stat } );
     CheckAbilityPointsState();
 }
@@ -84,12 +85,6 @@ function UpdateHealthAndMana()
 	$( "#movespeed-label" ).text = Entities.GetBaseMoveSpeed( queryUnit );
 }
 
-function UpdateHealthAndMana2()
-{
-	var queryUnit = Players.GetLocalPlayerPortraitUnit();
-	$.Msg("WOWO");
-}
-
 function SendMeStats() {
 	var queryUnit = Players.GetLocalPlayerPortraitUnit();
     var player = Players.GetLocalPlayer()
@@ -120,7 +115,6 @@ function GetMeStats( event_data )
     GameEvents.Subscribe( "dota_inventory_changed", SendMeStats );
 	GameEvents.Subscribe( "dota_inventory_item_changed", SendMeStats );
     GameEvents.Subscribe( "send_player_stats", GetMeStats);
-	GameEvents.Subscribe( "player_info_updated", UpdateHealthAndMana2 );
 	// GameEvents.Subscribe( "dota_player_update_selected_unit", UpdateAbilityList );
 	// GameEvents.Subscribe( "dota_player_update_query_unit", UpdateAbilityList );
 	// GameEvents.Subscribe( "dota_ability_changed", UpdateAbilityList );

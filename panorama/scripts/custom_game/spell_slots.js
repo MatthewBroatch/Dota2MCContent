@@ -14,7 +14,7 @@ function UpdateAbilityList()
 	abilityPanels = [];
 	// see if we can change spells
 	var bControlsUnit = Entities.IsControllableByPlayer( queryUnit, Game.GetLocalPlayerID() );
-	for ( var i = 0; i < Entities.GetAbilityCount( queryUnit ); ++i )
+	for ( var i = 0; i < Entities.GetAbilityCount( queryUnit ); i++ )
 	{
 		var ability = Entities.GetAbility( queryUnit, i );
 		if ( ability == -1 )
@@ -76,7 +76,6 @@ function UpdateSpellList() {
 
 function UpdateSpellListShown() {
 	var queryUnit = Players.GetLocalPlayerPortraitUnit();
-	$.Msg(Entities.IsRealHero( queryUnit ));
 	if( Entities.IsControllableByPlayer( queryUnit, Game.GetLocalPlayerID() ) && Entities.IsRealHero( queryUnit )) {
 		$("#known-spells-button").SetHasClass( "is_hidden", false );
 	} else {

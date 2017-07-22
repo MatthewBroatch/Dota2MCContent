@@ -1,5 +1,14 @@
 "use strict";
 
+var SLOTS = {
+	0: "main-hand",
+	1: "off-hand",
+	2: "head",
+	3: "cape",
+	4: "body",
+	5: "feat"
+}
+
 var m_Item = {};
 var m_QueryUnit = -1;
 
@@ -97,6 +106,11 @@ function OnDragDrop( panelId, draggedPanel )
 	// executing a slot swap - don't drop on the world
 	draggedPanel.m_DragCompleted = true;
 	
+	if(m_Item.isWearing && SLOTS[m_Item.slot] !== undefined && SLOTS[m_Item.slot] !== draggedItem.Slot) {
+		draggedPanel.m_DragFailed = true;
+		return true;
+	}
+
 	// item dropped on itself? don't acutally do the swap (but consider the drag completed)
 	var player = Players.GetLocalPlayer();
 	if( !draggedPanel.isWearing && m_Item.isWearing )
@@ -152,18 +166,26 @@ function OnDragStart( panelId, dragCallbacks )
 	return true;
 }
 
+function SendMeStats() {
+	var queryUnit = Players.GetLocalPlayerPortraitUnit();
+	var player = Players.GetLocalPlayer()
+	GameEvents.SendCustomGameEventToServer( "get_unit_stats", { "player" : player, "unit" : queryUnit } );
+}
+
 function OnDragEnd( panelId, draggedPanel )
 {
 	// if the drag didn't already complete, then try dropping in the world
-	if ( !draggedPanel.m_DragCompleted )
-	{
-		var player = Players.GetLocalPlayer();
-		GameEvents.SendCustomGameEventToServer( "drop_item", { "player" : player, "unit" : m_QueryUnit, "itemName": m_Item.item.ItemName, "at": GameUI.GetCursorPosition() } );
-		if(m_Item.item.PassiveModifier && m_Item.isWearing)
-			GameEvents.SendCustomGameEventToServer( "remove_modifier", { "player" : player, "unit" : m_QueryUnit, "modifierName": m_Item.item.PassiveModifier, "abilityName": m_Item.item.ItemName } );
-		m_Item.item = undefined;
-	} else {
-		m_Item.item = draggedPanel.m_SwapItem;
+	if( !draggedPanel.m_DragFailed ) {
+		if ( !draggedPanel.m_DragCompleted )
+		{
+			var player = Players.GetLocalPlayer();
+			GameEvents.SendCustomGameEventToServer( "drop_item", { "player" : player, "unit" : m_QueryUnit, "itemName": m_Item.item.ItemName, "at": GameUI.GetCursorPosition() } );
+			if(m_Item.item.PassiveModifier && m_Item.isWearing)
+				GameEvents.SendCustomGameEventToServer( "remove_modifier", { "player" : player, "unit" : m_QueryUnit, "modifierName": m_Item.item.PassiveModifier, "abilityName": m_Item.item.ItemName } );
+			m_Item.item = undefined;
+		} else {
+			m_Item.item = draggedPanel.m_SwapItem;
+		}
 	}
 
 	// restore our look
@@ -172,7 +194,7 @@ function OnDragEnd( panelId, draggedPanel )
 	// kill the display panel
 	draggedPanel.DeleteAsync( 0 );
 	UpdateItem();
-
+	SendMeStats();
 	return true;
 }
 

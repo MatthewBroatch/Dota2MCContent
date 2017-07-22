@@ -3,11 +3,14 @@
 		<include src="file://{resources}/scripts/custom_game/disable_ui.js" />
 	</scripts>
 	<Panel>
+		<CustomUIElement type="LoadingScreen" layoutfile="file://{resources}/layout/custom_game/custom_loading_screen.xml" />
+		<CustomUIElement type="GameSetup" layoutfile="file://{resources}/layout/custom_game/pre_game_selection.xml" /> 
 		<CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/spell_slots.xml" />
 		<CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/health_and_mana.xml" />
-		<!-- <CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/action_bar.xml" /> -->
 		<CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/inventory.xml" />
 		<CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/buff_list.xml" />
 		<CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/build_images.xml" />
+		<CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/barebones_attachments.xml" />
+		<CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/notifications.xml" />
 	</Panel>
 </root>

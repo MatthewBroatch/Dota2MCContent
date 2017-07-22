@@ -5,8 +5,10 @@
 	<scripts>
 	</scripts>
 	<Panel class="build-images" hittest="false" visibility="collapse">
-		<Image src="file://{images}/armour.png" visibility="collapse" />				
+		<Image src="file://{images}/armor.png" visibility="collapse" />				
 		<Image src="file://{images}/helmet.png" visibility="collapse" />		
 		<Image src="file://{images}/cape.png" visibility="collapse" />		 
+		<Image src="file://{images}/loading/blank.png" visibility="collapse" />		 
+		<Image src="file://{images}/loading/mastercrafters.png" visibility="collapse" />		 
 	</Panel>
 </root>

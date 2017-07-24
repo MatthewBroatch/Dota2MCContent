@@ -113,12 +113,18 @@ function OnDragDrop( panelId, draggedPanel )
 
 	// item dropped on itself? don't acutally do the swap (but consider the drag completed)
 	var player = Players.GetLocalPlayer();
-	if( !draggedPanel.isWearing && m_Item.isWearing )
-		if( draggedItem.PassiveModifier )
+	if( !draggedPanel.isWearing && m_Item.isWearing ) {
+		if( draggedItem.PassiveModifier ) {
 			GameEvents.SendCustomGameEventToServer( "activate_modifier", { "player" : player, "unit" : m_QueryUnit, "modifierName": draggedItem.PassiveModifier, "abilityName": draggedItem.ItemName } );
-	if( draggedPanel.isWearing && !m_Item.isWearing)
-		if( draggedItem.PassiveModifier )
+		}
+		GameEvents.SendCustomGameEventToServer( "attach_prop", { "player" : player, "unit" : m_QueryUnit, "attach": draggedItem.Attach, "model": draggedItem.Model } );
+	}
+	if( draggedPanel.isWearing && !m_Item.isWearing) {
+		if( draggedItem.PassiveModifier ) {
 			GameEvents.SendCustomGameEventToServer( "remove_modifier", { "player" : player, "unit" : m_QueryUnit, "modifierName": draggedItem.PassiveModifier, "abilityName": draggedItem.ItemName } );
+		}
+		GameEvents.SendCustomGameEventToServer( "remove_prop", { "player" : player, "unit" : m_QueryUnit, "attach": draggedItem.Attach, "model": draggedItem.Model } );
+	}
 	if(m_Item.item !== undefined)
 		draggedPanel.m_SwapItem = m_Item.item;
 	// create the order
@@ -180,8 +186,12 @@ function OnDragEnd( panelId, draggedPanel )
 		{
 			var player = Players.GetLocalPlayer();
 			GameEvents.SendCustomGameEventToServer( "drop_item", { "player" : player, "unit" : m_QueryUnit, "itemName": m_Item.item.ItemName, "at": GameUI.GetCursorPosition() } );
-			if(m_Item.item.PassiveModifier && m_Item.isWearing)
+			if(m_Item.item.PassiveModifier && m_Item.isWearing) {
 				GameEvents.SendCustomGameEventToServer( "remove_modifier", { "player" : player, "unit" : m_QueryUnit, "modifierName": m_Item.item.PassiveModifier, "abilityName": m_Item.item.ItemName } );
+			}
+			if(m_Item.isWearing) {
+				GameEvents.SendCustomGameEventToServer( "remove_prop", { "player" : player, "unit" : m_QueryUnit, "attach": m_Item.item.Attach, "model": m_Item.item.Model } );
+			}
 			m_Item.item = undefined;
 		} else {
 			m_Item.item = draggedPanel.m_SwapItem;

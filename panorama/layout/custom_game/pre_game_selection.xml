@@ -1,0 +1,26 @@
+<root>
+  <styles>
+    <include src="file://{resources}/styles/custom_game/pre_game_selection.css" />
+	<include src="s2r://panorama/styles/dotastyles.vcss_c" />
+  </styles>
+  <script>
+    function create()
+		{
+      $.Msg("create hero");
+			$.GetContextPanel().DeleteAsync(0.1);
+	    Game.SetRemainingSetupTime(2); 
+      var player = Players.GetLocalPlayer();
+      GameEvents.SendCustomGameEventToServer("create_hero", { "player": player });    
+		}
+  </script>
+	<Panel class="PreGameSelectionRoot" hittest="false">			
+		
+    <Button id="create" class="container"
+      onactivate="create()">
+	    <Panel class="inner">			
+        <Label text="Create a new character" />
+    	</Panel>
+    </Button>
+		
+	</Panel>
+</root>

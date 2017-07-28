@@ -2,10 +2,10 @@
 {
 	horizontal-align: left;
 	vertical-align: bottom;
-	margin-bottom: 400px;
-	margin-left: 550px;
+	margin-bottom: 420px;
+	margin-left: 20px;
 	
-	flow-children: down;
+	flow-children: up;
 }
 
 #buffs_list

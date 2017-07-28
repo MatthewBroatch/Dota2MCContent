@@ -73,13 +73,14 @@ function UpdateHealthAndMana()
 	var queryUnit = Players.GetLocalPlayerPortraitUnit();
 	var container = $( "#health-and-mana" );
 	if ( !container )
-		return;
-	$( "#health-percent" ).style.width = (Entities.GetHealth( queryUnit ) / Entities.GetMaxHealth( queryUnit ) * 100) + "%";
-	$( "#mana-percent" ).style.width = (Entities.GetMana( queryUnit ) / Entities.GetMaxMana( queryUnit ) * 100) + "%";
-	$( "#health-regen" ).text = "+" + Math.round(Entities.GetHealthThinkRegen( queryUnit ) * 10) / 10;
-    $( "#mana-regen" ).text = "+" + Math.round(Entities.GetManaThinkRegen( queryUnit ) * 10) / 10;
+        return;
+    var maxMana = Entities.GetMaxMana( queryUnit );
+    var mana = Entities.GetMana( queryUnit );
+    $( "#health-percent" ).style.width = (Entities.GetHealth( queryUnit ) / Entities.GetMaxHealth( queryUnit ) * 100) + "%";
+    if( maxMana > 0)
+	    $( "#mana-percent" ).style.width = (mana / maxMana * 100) + "%";
 	$( "#health-total" ).text = Entities.GetHealth( queryUnit ) + "/" + Entities.GetMaxHealth( queryUnit );
-	$( "#mana-total" ).text = Entities.GetMana( queryUnit ) + "/" + Entities.GetMaxMana( queryUnit );
+	$( "#mana-total" ).text = mana+ "/" + maxMana;
 	$( "#damage-label" ).text = (Entities.GetDamageMax( queryUnit ) + Entities.GetDamageMin( queryUnit )) / 2 + Entities.GetDamageBonus( queryUnit );
 	$( "#armor-label" ).text = Math.round((Entities.GetPhysicalArmorValue( queryUnit ) + Entities.GetBonusPhysicalArmor( queryUnit )) * 10) / 10;
 	$( "#movespeed-label" ).text = Entities.GetBaseMoveSpeed( queryUnit );
@@ -97,6 +98,8 @@ function GetMeStats( event_data )
         $( "#strength-label" ).text = event_data.str;
         $( "#agility-label" ).text = event_data.agi;
         $( "#intelligence-label" ).text = event_data.int;
+        $( "#health-regen" ).text = "+" + Math.round(event_data.healthRegen * 10) / 10;
+        $( "#mana-regen" ).text = "+" + Math.round(event_data.manaRegen * 10) / 10;
     }
     else {
         $( "#strength-label" ).text = "-";
